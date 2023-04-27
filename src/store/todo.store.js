@@ -43,12 +43,12 @@ const getTodos=(filter=Filters.All)=>{
 
 /**
  * 
- * @param {string} desciption 
+ * @param {string} description 
  */
 const addTodo=(desciption)=>{
-    if (!desciption) throw new Error('Description is required');
+    if (!description) throw new Error('Description is required');
 
-    state.todos.push(new Todo(desciption));
+    state.todos.push(new Todo(description));
 }
 
 /**
