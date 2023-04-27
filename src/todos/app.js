@@ -30,6 +30,7 @@ export const App = (elementId)=>{
     
     //referencias html
     const newDescriptionInput=document.querySelector(ElementIDs.NewTodoImput);
+    const todoListUL= document.querySelector(ElementIDs.TodoList);
 
     //listeners
     newDescriptionInput.addEventListener('keyup', (event)=>{
@@ -39,6 +40,11 @@ export const App = (elementId)=>{
         todoStore.addTodo(event.target.value);
         displayTodos();
         event.target.value='';
-    })
+    });
 
+    todoListUL.addEventListener('click', (event)=>{
+        const element= event.target.closest('[data-id]');
+        todoStore.toggleTodo(element.getAttribute('data-id'));
+        displayTodos();
+    });
 };
