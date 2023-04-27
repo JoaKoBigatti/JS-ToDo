@@ -45,7 +45,7 @@ const getTodos=(filter=Filters.All)=>{
  * 
  * @param {string} description 
  */
-const addTodo=(desciption)=>{
+const addTodo=(description)=>{
     if (!description) throw new Error('Description is required');
 
     state.todos.push(new Todo(description));
