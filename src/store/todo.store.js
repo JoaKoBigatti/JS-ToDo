@@ -20,13 +20,21 @@ const state={
 
 
 const initStore=()=>{
-    console.log(state);
+    loadStore();
     console.log('InitStore🥑');
 }
 
-const loadStore=()=>{
-    throw new Error('No esta implementado');
+const saveStateToLocalStorage =()=>{
+
+    localStorage.setItem('state',JSON.stringify(state));
 }
+
+function loadStore() {
+    if(!localStorage.getItem('state')) return;
+    const {todos = [], filter = Filters.All} = JSON.parse(localStorage.getItem('state'));
+    state.todos=todos;
+    state.filter=filter;
+}   
 
 const getTodos=(filter=Filters.All)=>{
     switch(filter){
@@ -49,12 +57,13 @@ const addTodo=(description)=>{
     if (!description) throw new Error('Description is required');
 
     state.todos.push(new Todo(description));
+    saveStateToLocalStorage();
 }
 
 /**
  * 
  * @param {string} todoId 
- */
+*/
 const toggleTodo=(todoId)=>{
     state.todos=state.todos.map(todo=>{
         if(todo.id === todoId){
@@ -62,30 +71,34 @@ const toggleTodo=(todoId)=>{
         }
         return todo;
     })
+    saveStateToLocalStorage();
 }
 
 /**
  * regresa todos los todos menos el todo que recibe la funcion para eliminarlo
  * @param {string} todoId 
- */
+*/
 const deleteTodo=(todoId)=>{
     state.todos = state.todos.filter(todo=>todo.id !== todoId);
+    saveStateToLocalStorage();
 }
 
 /**
  * 
  * @param {string}  
- */
+*/
 const deleteCompleted=()=>{
     state.todos = state.todos.filter(todo=>todo.done);
+    saveStateToLocalStorage();
 }
 
 /**
  * 
  * @param {Filters} newFilter 
- */
+*/
 const setFilter=(newFilter=Filters.All)=>{
     state.filter=newFilter;
+    saveStateToLocalStorage();
 }
 
 const getCurrentFilter=()=>{

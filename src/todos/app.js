@@ -4,7 +4,7 @@ import { renderTodos } from './use-cases';
 
 const ElementIDs = {
     TodoList: '.todo-list',
-    NewTodoImput: '#new-todo-input'
+    NewTodoImput: '#new-todo-input',
 }
 
 /**
@@ -47,4 +47,16 @@ export const App = (elementId)=>{
         todoStore.toggleTodo(element.getAttribute('data-id'));
         displayTodos();
     });
+    
+    todoListUL.addEventListener('click', (event)=>{
+        // console.log(event.target)
+        if(event.target.closest('.destroy')){
+            const element= event.target.closest('[data-id]');
+            todoStore.deleteTodo(element.getAttribute('data-id'));
+            displayTodos();
+        } return;
+    });
+
+
+
 };
