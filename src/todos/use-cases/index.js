@@ -1,5 +1,4 @@
 export { createTodoHTML } from "./create-todo-html";
-export { Todo } from "../models/todo.model";
+export { renderPending } from "./render-pending";
 export { renderTodos } from "./render-todos";
-
-
+export { Todo } from "../models/todo.model";
